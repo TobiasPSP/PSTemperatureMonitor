@@ -32,3 +32,9 @@ To format the results as a table, you may want to run this code:
 ```powershell
 Start-MonitorTemperature -Interval 5 | Format-Table -Wrap
 ```
+
+## More
+
+As a seasoned PowerShell user, feel free to dissect my code. I was just interested in temperature sensors, but the code shows the general principle of connecting to the *OpenHardwareMonitor* DLL and query all kinds of other hardware-related info.
+
+It just takes minor effort to turn the code into a general-purpose hardware inventory script. To get going, I'd suggest you look at the original free GUI-based *OpenHardwareMonitor* software. It displays all hardware info in a GUI tree view. That is the information you can as well query via PowerShell.
