@@ -2,6 +2,9 @@
 
 This module provides an easy-to-use cmdlet to monitor physical hardware temperature.
 
+> The actual logic for reading and evaluating hardware temperature data is performed by an open-source DLL gathered from https://openhardwaremonitor.org/.
+> Basically, the *OpenHardwareMonitor* is a *DLL* plus a GUI that can be used to investigate your hardware, including temperature sensors. The DLL is doing the actual work, and this module shows how *you* can use the DLL and query it via PowerShell for whatever hardware information you are after.
+
 ## Download and Install
 
 So if your notebook van is making noises, or you'd like to check your server health, simply install this module from the PowerShell Gallery:
@@ -16,3 +19,11 @@ Install-Module -Name PSTemperatureMonitor -Scope CurrentUser
 
 ## Monitor
 
+> Reading hardware information requires local *Administrator* privileges!
+
+To start a continuous monitoring, use `Start-MonitorTemperature -Interval 5`. This will update the readings every 5 seconds.
+To format the results as a table, you may want to run this code:
+
+```powershell
+Start-MonitorTemperature -Interval 5 | Format-Table -Wrap
+```
