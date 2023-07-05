@@ -27,11 +27,23 @@
     [CmdletBinding()]
     param
     (
-        # Monitoring interval in seconds. Default is 1 second.
-        [ValidateRange(1,100000)]
+        # Monitoring interval in seconds. Default is 1 second. When you specify 0, the results are returned, and no monitoring occurs.
+        [ValidateRange(0,100000)]
         [int]
         $Interval=1
     )
+
+Add-Type -Path "$PSScriptRoot\binaries\OpenHardwareMonitorLib.dll"
+
+$isAdmin = ([Security.Principal.WindowsPrincipal] `
+  [Security.Principal.WindowsIdentity]::GetCurrent() `
+).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (!$isAdmin)
+{
+	Write-Warning 'You need to run with Administrator privileges in order to read hardware details.'
+        return
+}
 
     $HardwareMonitor = [OpenHardwareMonitor.Hardware.Computer]::new()
     $HardwareMonitor.CPUEnabled = $true
@@ -62,7 +74,7 @@
             [PSCustomObject]$result
         
             Start-Sleep -Seconds $Interval
-        } while ($true)
+        } while ($true -and ($interval -ne 0))
     
     }
     finally

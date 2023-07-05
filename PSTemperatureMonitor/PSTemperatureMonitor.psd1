@@ -14,7 +14,7 @@
 RootModule = 'loader.psm1'
 
 # Version Number
-ModuleVersion = '1.3'
+ModuleVersion = '1.4'
 
 # Unique Module ID
 GUID = '4f822d03-3b80-4296-b1b1-8f28d6392ef7'
